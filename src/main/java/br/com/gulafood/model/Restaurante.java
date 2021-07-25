@@ -12,12 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
-import lombok.Data; 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor; 
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class Restaurante implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +32,9 @@ public class Restaurante implements Serializable {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
+	
+	@ManyToOne
+	private Cozinha cozinha;
 	
 	/* relacionamento muitos para muitos e decalarando o nome das chaves estrangeiras na tabela intermediaria */
 	@ManyToMany 
