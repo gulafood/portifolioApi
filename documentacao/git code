@@ -1,0 +1,79 @@
+permissao android
+sudo chown $USER /dev/kvm  
+
+
+link codigos git 
+
+https://gist.github.com/leocomelli/2545add34e4fec21ec16
+
+abrir o android
+
+winston@winston: cd  /usr/local/android-studio/bin
+winston@winston:/usr/local/android-studio/bin$ ./studio.sh
+
+
+subir projeto para o git
+
+1 git remote add origin https://github.com/gulafood/gula.git exemplo
+2  git push -u origin master
+
+setar email 
+
+git config --global user.name "git8cmd@gmail.com"
+
+setar usuario
+
+git config --global user.name "winston salem"
+
+setar ide
+
+git config --global core.editor sts
+
+setar arquivos a serem ignorados
+
+git config --global core.excludesfile ~/.gitignore
+
+lista configuraçoes 
+
+git config --list
+
+criar um repositorio 
+
+gir init
+
+verificar estado de diretorios
+
+git status
+
+adicionar diretorio especifico
+
+git add nome
+
+adicionar todos os diretorios 
+
+git add .
+
+Comitar um arquivo
+
+git commit meu_arquivo.txt
+
+Comitar vários arquivos
+
+git commit meu_arquivo.txt meu_outro_arquivo.txt
+
+Comitar informando mensagem
+
+git commit meuarquivo.txt -m "minha mensagem de commit"
+
+Remover arquivo
+
+git rm meu_arquivo.txt
+
+Remover diretório
+
+git rm -r diretorio
+
+git log
+
+
+
