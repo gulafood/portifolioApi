@@ -45,6 +45,7 @@ public class CozinhaController {
 	    	ResponseEntity.status(HttpStatus.OK).body(cozinha.get());
 	    
 	    System.out.println("teste");
+	    System.out.println("teste");
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		
 		
