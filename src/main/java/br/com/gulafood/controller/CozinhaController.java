@@ -63,7 +63,7 @@ public class CozinhaController {
 
 	}
 
-	@DeleteMapping("/{id}") // deleta uma cozinha se ela nao estiver com integridade a uma classe
+	@DeleteMapping("/{id}") // deleta uma cozinha se ela nao estiver com integridade a uma classes
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
 
