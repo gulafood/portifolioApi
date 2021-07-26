@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,9 @@ public class Restaurante implements Serializable {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
+	
+	@Embedded
+	private Endereco endereco;
 	
 	@ManyToOne
 	private Cozinha cozinha;
