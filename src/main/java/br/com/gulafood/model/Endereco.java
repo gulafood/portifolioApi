@@ -9,5 +9,7 @@ import lombok.Data;
 public class Endereco {
 	
 	private String cep;
+	private String lougraduro;
+	private String numero;
 
 }
