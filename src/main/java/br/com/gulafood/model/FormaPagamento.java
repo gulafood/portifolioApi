@@ -9,9 +9,22 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+/**
+ * 
+ * @author winston
+ *
+ * classe forma de pagamento usando as anotação para criar uma tabela no
+ * banco e usar os metedos get e set
+ *
+ */
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class FormaPagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,5 +33,5 @@ public class FormaPagamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String forma;
+	private String tipoPagamento;
 }
