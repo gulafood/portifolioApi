@@ -25,8 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Restaurante implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Restaurante implements Serializable {// estou mexendo L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class Restaurante implements Serializable {
 	private BigDecimal taxaFrete;
 	
 	@Embedded
-	private Endereco endereco;
+	private Endereco endereco;//Eduardo 
 	
 	@ManyToOne
 	private Cozinha cozinha;

@@ -2,6 +2,8 @@ package br.com.gulafood.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -18,6 +20,9 @@ public class Endereco {
 	private String complemento;
 	@Column(name = "enderenco_bairro")
 	private String bairro;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "endereco_cidade_id")
+	private Cidade cidade;
 
 }
