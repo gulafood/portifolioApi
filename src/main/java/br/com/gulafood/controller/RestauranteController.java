@@ -68,6 +68,7 @@ public class RestauranteController {
 			restaurante.setId(restaurantes.getId());
 			return servicosRestaurantes.salvarRestaurante(restaurantes);
 		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		
 	}
 	
 	@DeleteMapping("/{id}")

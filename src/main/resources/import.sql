@@ -17,5 +17,5 @@ insert into forma_pagamento(forma)values('Cartao de Credito');
 insert into forma_pagamento(forma)values('Cartao de Debito');
 
 
-insert into Restaurante(nome,taxa_frete,cozinha_id)values('Macdonalds',5.00,3);
+insert into Restaurante(nome,taxa_frete,cozinha_id, forma_pagamento_id)values('Macdonalds',5.00,3,1);
 

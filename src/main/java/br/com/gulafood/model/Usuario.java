@@ -24,25 +24,16 @@ public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Email
-	@NotBlank
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private String email;
-	
 	private Long id;
 	
 	@Email
 	@NotBlank
-	private String nome;
+	private String email;
 	
 	@NotBlank
 	@Column( length = 4)
 	private String senha;
-
-	public Usuario(@NotBlank String senha) {
-		super();
-		this.senha = senha;
-	}
 	
 	
 	
