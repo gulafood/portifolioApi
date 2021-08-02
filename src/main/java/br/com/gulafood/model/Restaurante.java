@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +35,7 @@ public class Restaurante implements Serializable {// estou mexendo L;
 	private String nome;
 	private BigDecimal taxaFrete;
 	
+	@JsonIgnore
 	@Embedded
 	private Endereco endereco;//Eduardo 
 	
