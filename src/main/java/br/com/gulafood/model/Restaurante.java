@@ -27,8 +27,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Restaurante implements Serializable {// estou mexendo L;
-
+public class Restaurante implements Serializable {;
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
