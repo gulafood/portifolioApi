@@ -72,13 +72,13 @@ public class FormaPagamentoController {
 
 	}
 
-	@DeleteMapping("{/id}") // deletar uma forma de pagamento delegando para a classe servico
+
+	@DeleteMapping("/{id}") // deleta uma cozinha se ela nao estiver com integridade a uma classe fk
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
 
 		try {
 			tipoServicos.buscarForma(id).map(formaPagamentos -> {
-
 				tipoServicos.deletarForma(formaPagamentos);
 				return Void.TYPE;
 

@@ -18,33 +18,40 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.gulafood.Repository.CozinhaRepository;
 import br.com.gulafood.model.Cozinha;
+import br.com.gulafood.services.CozinhaServicos;
 
+/**
+ * 
+ * @author winston
+ *
+ *         classe controller esta realiza todas as entradas pelo usuario e
+ *         delega para de servico
+ */
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
 
 	@Autowired
-	private CozinhaRepository cozinhaRepository;
+	private CozinhaServicos cozinhaServicos;
 
 	@GetMapping // busca todas as cozinha do banco
 	public List<Cozinha> todas() {
 
-		return cozinhaRepository.findAll();
+		return cozinhaServicos.todasCozinha();
 	}
 
 	@PostMapping // salva uma cozinha no banco
 	@ResponseStatus(HttpStatus.CREATED)
 	public void salvar(@RequestBody Cozinha cozinha) {
 
-		cozinhaRepository.save(cozinha);
+		cozinhaServicos.salvarCozinha(cozinha);
 	}
 
 	@GetMapping("/{id}") // pesquisa por uma cozinha por id
 	public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
 
-		Optional<Cozinha> cozinha = cozinhaRepository.findById(id);
+		Optional<Cozinha> cozinha = cozinhaServicos.buscarCozinha(id);
 
 		return (cozinha.isPresent()) ? ResponseEntity.status(HttpStatus.OK).body(cozinha.get())
 				: ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -55,9 +62,9 @@ public class CozinhaController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody Cozinha atualiza) {
 
-		cozinhaRepository.findById(id).map(cozinha -> {
+		cozinhaServicos.buscarCozinha(id).map(cozinha -> {
 			atualiza.setId(cozinha.getId());
-			return cozinhaRepository.save(atualiza);
+			return cozinhaServicos.salvarCozinha(atualiza);
 
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -68,9 +75,8 @@ public class CozinhaController {
 	public void deletar(@PathVariable Long id) {
 
 		try {
-
-			cozinhaRepository.findById(id).map(cozinhaId -> {
-				cozinhaRepository.delete(cozinhaId);
+			cozinhaServicos.buscarCozinha(id).map(cozinhaId -> {
+				cozinhaServicos.deletarCozinha(cozinhaId);
 				return Void.TYPE;
 
 			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
