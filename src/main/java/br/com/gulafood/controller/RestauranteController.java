@@ -3,6 +3,7 @@ package br.com.gulafood.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -21,73 +22,80 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.gulafood.model.Restaurante;
 import br.com.gulafood.services.RestauranteServicos;
 
-
 /**
  * 
  * @author Eduardo Santana da Cruz
  *
+ *		  inicio com a classe fez as configurações com as anotações fez o metedo buscar por id 
+ */
+
+/**
+ * 
+ * @author winston
+ *
+ *         termino de implementar os codigos restantes da classe
  */
 
 @RestController
 @RequestMapping("/restaurante")
 public class RestauranteController {
-	
-	
+
 	@Autowired
 	private RestauranteServicos servicosRestaurantes;
-	
-	@GetMapping
+
+	@GetMapping // busca todos os restaurantes de uma tabela
 	List<Restaurante> listar() {
-		
+
 		return servicosRestaurantes.todosRestaurantes();
 	}
-	
-	@PostMapping
+
+	@PostMapping // salva um novo restaurante na tabela
 	@ResponseStatus(HttpStatus.CREATED)
 	public Restaurante salvar(@RequestBody Restaurante restaurante) {
-		
+
 		return servicosRestaurantes.salvarRestaurante(restaurante);
 	}
-	
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<?>buscarPorId(@PathVariable Long id){
-		
+
+	@GetMapping("/{id}") // busca um restaurante na tabela atraves do id
+	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+
 		Optional<Restaurante> restaurante = servicosRestaurantes.buscarRestaurante(id);
-		
-		return (restaurante.isPresent()) ? ResponseEntity.ok(restaurante.get()): 
-			ResponseEntity.notFound().build();
-	
+
+		return (restaurante.isPresent()) ? ResponseEntity.ok(restaurante.get()) : ResponseEntity.notFound().build();
+
 	}
-	
-	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public void atualizar(@PathVariable Long id , @RequestBody Restaurante restaurante) {
-		
-		servicosRestaurantes.buscarRestaurante(id).map(restaurantes->{
-			restaurante.setId(restaurantes.getId());
-			return servicosRestaurantes.salvarRestaurante(restaurantes);
-		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-		
+
+	@PutMapping("/{id}") // atualiza uma cidade no banco e impede que os outros dados na hora da // atualização seja como null
+	public ResponseEntity<?> atualiza(@PathVariable Long id, @RequestBody Restaurante atualiza) {
+
+		Restaurante atualizar = servicosRestaurantes.buscarRestaurante(id).orElse(null);
+
+		if (atualizar != null) {
+			BeanUtils.copyProperties(atualiza, atualizar, "id", "formasPagamento", "endereco","dataCadastro", "produtos");/*<= evitar deixar como null*/
+			atualizar = servicosRestaurantes.salvarRestaurante(atualizar);
+
+			return ResponseEntity.ok(atualizar);
+		}
+
+		return ResponseEntity.notFound().build();
 	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable Long id){
-		
+
+	@DeleteMapping("/{id}") // deleta um restaurante no banco caso ela nao tenha integridade com outra tabela
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
+
 		try {
-			servicosRestaurantes.buscarRestaurante(id).map(restaurantes->{
+			servicosRestaurantes.buscarRestaurante(id).map(restaurantes -> {
 				servicosRestaurantes.deletarRestaurante(restaurantes);
 				return Void.TYPE;
-				
-			}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-			
+
+			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
 		} catch (DataIntegrityViolationException e) {
 
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
 
 }

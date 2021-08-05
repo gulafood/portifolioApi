@@ -3,6 +3,7 @@ package br.com.gulafood.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,12 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.gulafood.model.Cidade;
 import br.com.gulafood.services.CidadeServicos;
 
+/**
+ * 
+ * @author winston
+ *
+ */
+
 @RestController
 @RequestMapping("/cidades")
 public class CidadeCotroller {
@@ -28,12 +35,12 @@ public class CidadeCotroller {
 	@Autowired
 	private CidadeServicos servicosCidade;
 	
-	@GetMapping
+	@GetMapping// busca todas as cidades no banco 
 	public List<Cidade> todas(){
 		return servicosCidade.todasCidade();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") // busca uma cidade no banco atraves do id
 	public ResponseEntity<Cidade> buscar(@PathVariable Long id){
 		
 		Optional<Cidade> cidades = servicosCidade.buscaCidades(id);
@@ -42,24 +49,31 @@ public class CidadeCotroller {
 			ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping
+	@PostMapping // salva uma cidade no banco 
 	public Cidade salvar (Cidade cidade) {
 		
 		return servicosCidade.salvarCidade(cidade);
 	}
 	
-	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void atualizar(@PathVariable Long id , @RequestBody Cidade atualiza) {
+
+	
+	@PutMapping("/{id}")// atualiza uma cidade no banco e impede que os outros dados na hora da atualização seja como null
+	ResponseEntity<?> atualiza(@PathVariable Long id , @RequestBody Cidade atualiza){
 		
-		servicosCidade.buscaCidades(id).map(cidades->{
-			atualiza.setId(cidades.getId());
-			return servicosCidade.salvarCidade(atualiza);
+		Cidade atualizar = servicosCidade.buscaCidades(id).orElse(null);
+		
+		if(atualizar != null) {
 			
-		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+			BeanUtils.copyProperties(atualiza, atualizar,"id","estado");/*<= evitar deixar como null*/
+			atualizar = servicosCidade.salvarCidade(atualizar);
+			return ResponseEntity.ok(atualizar);
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/{id}")
+	
+	@DeleteMapping("/{id}") // deleta uma cidade no banco caso ela nao tenha integridade com outra tabela
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
 		

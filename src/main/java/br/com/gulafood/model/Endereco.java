@@ -7,8 +7,15 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author winston
+ *
+ *
+ */
+
 @Data
-@Embeddable
+@Embeddable // esta anotação indica que esta e imcorporada em uma entidade e uma parte de uma entidade 
 public class Endereco {
 	@Column(name = "endereco_cep")
 	private String cep;
