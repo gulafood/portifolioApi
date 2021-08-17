@@ -55,7 +55,7 @@ public class EstadoController {
 		Optional<Estado> estadoId = servicosEstado.buscaEstado(id);
 
 		return (estadoId.isPresent()) ? ResponseEntity.status(HttpStatus.OK).body(estadoId.get())
-				: ResponseEntity.noContent().build();
+				: ResponseEntity.notFound().build();
 	}
 
 	@PutMapping("/{id}") // atualiza um estado no banco de dados
