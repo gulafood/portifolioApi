@@ -14,6 +14,8 @@ import br.com.gulafood.model.Usuario;
 @Service
 public class UsuarioServicos {
 	
+	Usuario use = new Usuario();
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -30,8 +32,14 @@ public class UsuarioServicos {
 		return usuarioRepository.findAll();
 	}
 	
+	
+		  
+	
+	
 	@Transactional
 	public Usuario salvarUsuario( Usuario usuario) {
+		
+		
 		
 		return usuarioRepository.save(usuario);
 	}

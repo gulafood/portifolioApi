@@ -39,7 +39,8 @@ public class UsuarioController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario salvar(@RequestBody Usuario usuario) {
 		
-		return servicoUsuario.salvarUsuario(usuario);
+		return	servicoUsuario.salvarUsuario(usuario);
+		
 	}
 	
 	
@@ -80,6 +81,9 @@ public class UsuarioController {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	
 	
 }
 

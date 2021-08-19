@@ -1,7 +1,7 @@
 package br.com.gulafood.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +38,18 @@ public class Usuario implements Serializable{
 	@Column(nullable = false)
 	private String email;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 6)
 	private String senha;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataCadastro;
 	
+
+	@Column(length = 12)
+	private String telefone;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDateTime dataCadastro;
+	
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo" , joinColumns = @JoinColumn(name = "usuario_id"),
@@ -55,8 +61,10 @@ public class Usuario implements Serializable{
 	@PrePersist // coloca a data de cadatro do sistema
 	public void prePersist() {
 		
-		setDataCadastro(LocalDate.now());
+		setDataCadastro(LocalDateTime.now());
 		
 	}
+	
+	
 	
 }
