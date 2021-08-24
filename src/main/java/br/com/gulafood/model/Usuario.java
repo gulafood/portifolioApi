@@ -47,7 +47,7 @@ public class Usuario implements Serializable {
 	@Column(length = 12)
 	private String telefone;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@Embedded // indicando que esta propriedade e de um tipo incorporando a classe restaurante 
 	private Endereco endereco;//Eduardo 
 	

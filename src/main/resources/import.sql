@@ -8,7 +8,7 @@ insert into estado  (nome) values ('São Paulo');
 insert into cidade (nome, estado_id) values ('Uberlândia', 1);
 insert into cidade (nome, estado_id) values ('Belo Horizonte', 2);
 
-insert into usuario(nome,email, senha,telefone) values('eduardo santana','eduardo@gmail.com','123456','62999999999');
+insert into usuario(nome,email, senha,telefone, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values('eduardo santana','eduardo@gmail.com','123456','62999999999',1,'38400-999', 'Rua João Pinheiro', '1000', 'Centro');
 
 insert into produto(nome,preco,ativo) values('Big Mac Quarterao',22.00,'true');
 insert into produto(nome,preco,ativo) values('Big Mac Feliz',25.00,'true');
