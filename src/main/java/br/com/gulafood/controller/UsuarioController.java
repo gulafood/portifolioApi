@@ -64,6 +64,8 @@ public class UsuarioController {
 		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
+	
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id){
 		

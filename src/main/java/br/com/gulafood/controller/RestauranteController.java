@@ -71,7 +71,7 @@ public class RestauranteController {
 		Restaurante atualizar = servicosRestaurantes.buscarRestaurante(id).orElse(null);
 
 		if (atualizar != null) {
-			BeanUtils.copyProperties(atualiza, atualizar, "id", "formasPagamento", "endereco","dataCadastro", "produtos");/*<= evitar deixar como null*/
+			BeanUtils.copyProperties(atualiza, atualizar, "id", "formasPagamento", "enderecosRestaurante","dataCadastro", "produtos");/*<= evitar deixar como null*/
 			atualizar = servicosRestaurantes.salvarRestaurante(atualizar);
 
 			return ResponseEntity.ok(atualizar);

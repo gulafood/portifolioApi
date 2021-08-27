@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,23 +46,20 @@ public class Usuario implements Serializable {
 
 	@Column(length = 12)
 	private String telefone;
-	
-	//@JsonIgnore
-	@Embedded // indicando que esta propriedade e de um tipo incorporando a classe restaurante 
-	private Endereco endereco;//Eduardo 
-	
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataCadastro;
 
-	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos = new ArrayList<>();
-	
-	
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuarioEndereco")
+	private List<Endereco> enderecosUsuario = new ArrayList<>();
+	
+	
 	@PrePersist // coloca a data de cadatro do sistema
 	public void prePersist() {
 

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,7 +50,8 @@ public class Restaurante implements Serializable {;
 	
 	
 	@JsonIgnore
-	@Embedded // indicando que esta propriedade e de um tipo incorporando a classe restaurante 
+	//@Embedded // indicando que esta propriedade e de um tipo incorporando a classe restaurante 
+	@ManyToOne
 	private Endereco endereco;//Eduardo 
 	
 	@ManyToOne
@@ -78,6 +78,8 @@ public class Restaurante implements Serializable {;
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "restauranteEndereco")
+	private List<Endereco> enderecosRestaurante = new ArrayList<>();
 	
 	@PrePersist // coloca a data de cadatro do sistema
 	public void prePersist() {
