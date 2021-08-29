@@ -1,7 +1,6 @@
 package br.com.gulafood.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.gulafood.Dto.UsuarioDto;
 import br.com.gulafood.model.Usuario;
 import br.com.gulafood.services.UsuarioServicos;
 
@@ -28,99 +28,64 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServicos servicoUsuario;
 	
-	
-	@GetMapping
-	public List<Usuario> todos(){
-		
-		return servicoUsuario.todosUsuario();
-	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario salvar(@RequestBody Usuario usuario) {
-		
-		return	servicoUsuario.salvarUsuario(usuario);
-		
+
+		return servicoUsuario.salvarUsuario(usuario);
+
 	}
-	
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> buscarId(@PathVariable Long id){
-		
-		Optional<Usuario> usuarioId = servicoUsuario.buscarUsuario(id);
-		
-		return (usuarioId.isPresent()) ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(usuarioId.get()):
-			ResponseEntity.notFound().build();
-	}
-	
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void atualizar(@PathVariable Long id , @RequestBody Usuario atualiza) {
-		
-		servicoUsuario.buscarUsuario(id).map(usuarios->{
+	public void atualizar(@PathVariable Long id, @RequestBody Usuario atualiza) {
+
+		servicoUsuario.buscarUsuario(id).map(usuarios -> {
 			atualiza.setId(usuarios.getId());
 			return servicoUsuario.salvarUsuario(atualiza);
-			
-		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
-	
-	
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable Long id){
-		
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
+
 		try {
-			servicoUsuario.buscarUsuario(id).map(usuarios->{
+			servicoUsuario.buscarUsuario(id).map(usuarios -> {
 				servicoUsuario.deletarUsuario(usuarios);
 				return Void.TYPE;
-				
-			}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-			
+
+			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
 		} catch (DataIntegrityViolationException e) {
-			
+
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-	
-	
+
+	@GetMapping("/{id}")
+	public Usuario buscarId(@PathVariable Long id) {
+
+		return servicoUsuario.buscarUsuario(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+	}
+
+	@GetMapping("/endereco/{id}")
+	public ResponseEntity<UsuarioDto> BuscarIdEnderecoUsuario(@PathVariable Long id) {
+
+		List<UsuarioDto> list = servicoUsuario.buscarDto(id);
+
+		for (UsuarioDto dt : list) {
+
+			if (dt.getId() == id) {
+				return ResponseEntity.ok(dt);
+			}
+		}
+
+		return ResponseEntity.notFound().build();
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

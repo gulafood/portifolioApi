@@ -1,8 +1,5 @@
 package br.com.gulafood.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.gulafood.Repository.EnderecoRepository;
 import br.com.gulafood.model.Endereco;
 import br.com.gulafood.services.EnderecoServicos;
 
@@ -29,15 +25,6 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoServicos servicosEnderecos;
 	
-	@Autowired
-	private EnderecoRepository en;
-
-	@GetMapping
-	public List<Endereco> todos(){
-		
-		return en.findAll();
-	}
-	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -46,15 +33,7 @@ public class EnderecoController {
 		return servicosEnderecos.salvarEndereco(endereco);
 	}
 
-	/*@GetMapping("/{id}")
-	public ResponseEntity<?> buscar(@PathVariable Long id) {
-
-		Optional<Endereco> endereco = servicosEnderecos.buscarEndereco(id);
-
-		return (endereco.isPresent()) ? ResponseEntity.status(HttpStatus.OK).body(endereco)
-				: ResponseEntity.notFound().build();
-	}*/
-
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> atualiza(@PathVariable Long id, @RequestBody Endereco atualiza) {
 
