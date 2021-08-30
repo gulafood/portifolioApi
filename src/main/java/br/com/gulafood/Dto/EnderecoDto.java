@@ -34,6 +34,7 @@ public class EnderecoDto {
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
+
 	}
 
 	// este construtor dto tem como paramentro uma entidade endereco e este pega
@@ -48,7 +49,6 @@ public class EnderecoDto {
 		bairro = endereco.getBairro();
 
 	}
-	
 
 	public Long getId() {
 		return id;

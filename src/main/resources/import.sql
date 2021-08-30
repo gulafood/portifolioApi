@@ -25,6 +25,8 @@ insert into usuario (email,nome,senha,telefone) values('winston@gmail.com' , 'wi
 
 insert into endereco( endereco_bairro , endereco_cep , endereco_numero , endereco_cidade_id, usuario_endereco_id ) values ('sao judas tadeu' , '74585654' , '1000' , 1 , 1);
 
+insert into endereco( endereco_bairro , endereco_cep , endereco_numero , endereco_cidade_id, usuario_endereco_id ) values ('vila nova' , '74585654' , '1000' , 1 , 1);
+
 
 insert into forma_pagamento (tipo_pagamento) values('avista');
 

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 import br.com.gulafood.model.Usuario;
 
 
@@ -42,6 +40,8 @@ public class UsuarioDto {
 		this.telefone = telefone;
 		this.dataCadastro = dataCadastro;
 		this.enderecos = enderecos;
+		
+		
 	}
 
 	// conversao de produto para produtoDto copiando as enderecos fazendo uma stream>map convertendo cada 
@@ -115,6 +115,9 @@ public class UsuarioDto {
 	public void setEnderecos(List<EnderecoDto> enderecos) {
 		this.enderecos = enderecos;
 	}
+
+
+	
 	
 	
 	

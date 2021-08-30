@@ -1,5 +1,7 @@
 package br.com.gulafood.controller;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.gulafood.Repository.EnderecoRepository;
 import br.com.gulafood.model.Endereco;
 import br.com.gulafood.services.EnderecoServicos;
 
@@ -25,6 +28,14 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoServicos servicosEnderecos;
 	
+	@Autowired
+	private EnderecoRepository er;
+	
+	@GetMapping
+	public List<Endereco> todos(){
+		
+		return er.findAll();
+	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
