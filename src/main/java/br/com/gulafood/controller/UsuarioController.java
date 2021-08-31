@@ -78,10 +78,10 @@ public class UsuarioController {
 
 		List<UsuarioDto> list = servicoUsuario.buscarDto(id);
 
-		for (UsuarioDto dt : list) {
+		for (UsuarioDto user : list) {
 
-			if (dt.getId() == id) {
-				return ResponseEntity.ok(dt);
+			if (user.getId() == id) {
+				return ResponseEntity.ok(user);
 			}
 		}
 
