@@ -18,7 +18,7 @@ insert into produto(nome,preco,descricao,ativo) values('Big Mac Duplo Queijo Cha
 insert into produto(nome,preco,descricao,ativo) values('Big Mac Duplo Queijo Mussarelo',33.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
 insert into produto(nome,preco,descricao,ativo) values('Big Mac Feliz Duplo Queijo',92.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
 insert into produto(nome,preco,descricao,ativo) values('Big Mac Quarterao Em Dobro',42.90,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
-insert into produto(nome,preco,descricao.ativo) values('Big Mac ',12.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
+insert into produto(nome,preco,descricao,ativo) values('Big Mac ',12.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
 
 
 insert into usuario (email,nome,senha,telefone) values('winston@gmail.com' , 'wisnton' , '123456', '6295887744');
