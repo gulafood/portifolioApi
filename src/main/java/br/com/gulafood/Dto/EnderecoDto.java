@@ -1,5 +1,6 @@
 package br.com.gulafood.Dto;
 
+import br.com.gulafood.model.Cidade;
 import br.com.gulafood.model.Endereco;
 
 /**
@@ -23,18 +24,9 @@ public class EnderecoDto {
 	private String complemento;
 	private String bairro;
 
+	private Cidade cidade;
+
 	public EnderecoDto() {
-	}
-
-	public EnderecoDto(Long id, String cep, String lograduro, String numero, String complemento, String bairro) {
-		super();
-		this.id = id;
-		this.cep = cep;
-		this.lograduro = lograduro;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-
 	}
 
 	// este construtor dto tem como paramentro uma entidade endereco e este pega
@@ -47,7 +39,16 @@ public class EnderecoDto {
 		numero = endereco.getNumero();
 		complemento = endereco.getComplemento();
 		bairro = endereco.getBairro();
+		cidade = endereco.getCidade();
 
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public Long getId() {

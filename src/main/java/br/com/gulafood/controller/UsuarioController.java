@@ -67,6 +67,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
 	public Usuario buscarId(@PathVariable Long id) {
 
 		return servicoUsuario.buscarUsuario(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -87,5 +88,6 @@ public class UsuarioController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
 
 }

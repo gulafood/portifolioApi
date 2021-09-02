@@ -17,6 +17,7 @@ public class CidadeServicos {
 	@Autowired
 	private CidadeRepository cidadeRepository;
 	
+	
 	@Transactional
 	public Optional<Cidade> buscaCidades(Long id){
 		
@@ -31,7 +32,9 @@ public class CidadeServicos {
 	@Transactional
 	public Cidade salvarCidade( Cidade cidade) {
 		
-		return cidadeRepository.save(cidade);
+			
+			return cidadeRepository.save(cidade);
+	
 	}
 	
 	@Transactional

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import br.com.gulafood.model.Usuario;
 
-
 /**
  * 
  * 
@@ -23,41 +22,28 @@ public class UsuarioDto {
 	private String telefone;
 	private LocalDateTime dataCadastro;
 
-	// lista de enderecos 
+	// lista de enderecos
 	private List<EnderecoDto> enderecos = new ArrayList<>();
 
 	public UsuarioDto() {
 	}
-	
-	
-	public UsuarioDto(Long id, String nome, String email, String senha, String telefone, LocalDateTime dataCadastro,
-			List<EnderecoDto> enderecos) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.telefone = telefone;
-		this.dataCadastro = dataCadastro;
-		this.enderecos = enderecos;
-		
-		
-	}
 
-	// conversao de produto para produtoDto copiando as enderecos fazendo uma stream>map convertendo cada 
-	// elemento end para um enderecoDto ou seja apartir da lista de enderecos de usuario eu estou produzindo uma 
+	// conversao de produto para produtoDto copiando as enderecos fazendo uma
+	// stream>map convertendo cada
+	// elemento end para um enderecoDto ou seja apartir da lista de enderecos de
+	// usuario eu estou produzindo uma
 	// lista de endereçoDto para associar ao usuarioDto
 	public UsuarioDto(Usuario usuario) {
-		
+
 		id = usuario.getId();
 		nome = usuario.getNome();
 		email = usuario.getEmail();
 		senha = usuario.getSenha();
-		telefone =  usuario.getTelefone();
-		dataCadastro =  usuario.getDataCadastro();
-		
-		enderecos = usuario.getEnderecosUsuario().stream().map(end-> new EnderecoDto(end)).
-				collect(Collectors.toList());
+		telefone = usuario.getTelefone();
+		dataCadastro = usuario.getDataCadastro();
+
+		enderecos = usuario.getEnderecosUsuario().stream().map(end -> new EnderecoDto(end))
+				.collect(Collectors.toList());
 	}
 
 	public Long getId() {
@@ -116,11 +102,4 @@ public class UsuarioDto {
 		this.enderecos = enderecos;
 	}
 
-
-	
-	
-	
-	
-	
-	
 }

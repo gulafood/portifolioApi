@@ -13,32 +13,33 @@ import br.com.gulafood.model.Produto;
 
 @Service
 public class ProdutoServicos {
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@Transactional
-	public Optional<Produto> buscarProduto(Long id){
-		
+	public Optional<Produto> buscarProduto(Long id) {
+
 		return produtoRepository.findById(id);
 	}
-	
+
 	@Transactional
-	public List<Produto>todosProdutos(){
-		
-		return produtoRepository.findAll();
-	}
-	
-	@Transactional
-	public Produto salvarProduto( Produto produto) {
-		
+	public Produto salvarProduto(Produto produto) {
+
 		return produtoRepository.save(produto);
 	}
-	
+
 	@Transactional
 	public void deletarProduto(Long id) {
-		
-		 produtoRepository.deleteById(id);;
+
+		produtoRepository.deleteById(id);
+		;
+	}
+
+	@Transactional
+	public List<Produto> buscarProdutoPorNomes(String nome) {
+
+		return produtoRepository.findBynomeContaining(nome);
 	}
 
 }

@@ -35,6 +35,7 @@ public class CidadeCotroller {
 	@Autowired
 	private CidadeServicos servicosCidade;
 	
+	
 	@GetMapping// busca todas as cidades no banco 
 	public List<Cidade> todas(){
 		return servicosCidade.todasCidade();
@@ -50,8 +51,8 @@ public class CidadeCotroller {
 	}
 	
 	@PostMapping // salva uma cidade no banco 
-	public Cidade salvar (Cidade cidade) {
-		
+	public Cidade salvar (@RequestBody Cidade cidade) {
+	
 		return servicosCidade.salvarCidade(cidade);
 	}
 	
