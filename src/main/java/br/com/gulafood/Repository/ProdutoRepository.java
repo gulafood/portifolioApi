@@ -10,4 +10,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	List<Produto> findBynomeContaining(String nome);
 
+	List<Produto> findByativoTrue();
 }

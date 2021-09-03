@@ -29,6 +29,12 @@ public class UsuarioController {
 	private UsuarioServicos servicoUsuario;
 	
 
+	@GetMapping
+	public List<Usuario>todos(){
+		
+		return servicoUsuario.todosUsuario();
+	}
+	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario salvar(@RequestBody Usuario usuario) {
