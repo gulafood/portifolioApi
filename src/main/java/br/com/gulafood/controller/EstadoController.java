@@ -37,19 +37,19 @@ public class EstadoController {
 	@Autowired
 	private EstadoServicos servicosEstado;
 
-	@GetMapping // busca todos os estados do banco
+	@GetMapping 
 	public List<Estado> todos() {
 		return servicosEstado.todosEstado();
 	}
 
-	@PostMapping // salva um estado no banco de dados 
+	@PostMapping 
 	@ResponseStatus(HttpStatus.CREATED)
 	public Estado salvar(@RequestBody Estado estado) {
 
 		return servicosEstado.salvarEstado(estado);
 	}
 
-	@GetMapping("/{id}") // busca um estado no banco de dados
+	@GetMapping("/{id}") 
 	public ResponseEntity<Estado> buscar(@PathVariable Long id) {
 
 		Optional<Estado> estadoId = servicosEstado.buscaEstado(id);
@@ -58,7 +58,7 @@ public class EstadoController {
 				: ResponseEntity.notFound().build();
 	}
 
-	@PutMapping("/{id}") // atualiza um estado no banco de dados
+	@PutMapping("/{id}") 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody Estado atualiza) {
 
@@ -68,7 +68,7 @@ public class EstadoController {
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 
-	@DeleteMapping("/{id}") // delata um estado do banco de dados 
+	@DeleteMapping("/{id}") 
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 
 		try {

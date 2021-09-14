@@ -2,6 +2,8 @@ package br.com.gulafood.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -37,10 +39,16 @@ public class UsuarioController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario salvar(@RequestBody Usuario usuario) {
-
-		return servicoUsuario.salvarUsuario(usuario);
-
+	public Usuario salvar(@Valid @RequestBody Usuario usuario) {
+		
+		boolean validar= UsuarioServicos.existe(usuario);
+		
+		if( validar != false) {
+			return servicoUsuario.salvarUsuario(usuario);
+		}
+		throw new  ResponseStatusException(HttpStatus.NOT_FOUND);
+		
+		
 	}
 
 	@PutMapping("/{id}")
@@ -79,7 +87,7 @@ public class UsuarioController {
 		return servicoUsuario.buscarUsuario(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
 	}
-
+	
 	@GetMapping("/endereco/{id}")
 	public ResponseEntity<UsuarioDto> BuscarIdEnderecoUsuario(@PathVariable Long id) {
 
@@ -94,6 +102,7 @@ public class UsuarioController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
 	
 
 }

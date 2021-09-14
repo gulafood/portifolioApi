@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,32 +25,39 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Data
 public class Usuario implements Serializable {
+	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 40)
+	@NotBlank
+	@Column(length = 40)
 	private String nome;
 
-	@Column(nullable = false)
+
+	@NotBlank
+	@javax.validation.constraints.Email
+	@Column(unique = true)
 	private String email;
 
-	@Column(nullable = false, length = 6)
+	@NotBlank
 	private String senha;
 
+	
 	@Column(length = 12)
 	private String telefone;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataCadastro;
 
+	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
@@ -67,4 +75,17 @@ public class Usuario implements Serializable {
 
 	}
 
+
+	
+
 }
+
+
+
+
+
+
+
+
+
+

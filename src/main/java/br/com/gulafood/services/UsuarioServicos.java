@@ -25,6 +25,8 @@ public class UsuarioServicos {
 		return usuarioRepository.findById(usuario);
 	}
 
+	// leva uma lista de usuarios contendo seus dados como os dados pessoal nome
+	// email e telefoen e uma lista de enderecos
 	@Transactional
 	public List<UsuarioDto> buscarDto(Long user) {
 
@@ -49,6 +51,15 @@ public class UsuarioServicos {
 	public void deletarUsuario(Usuario usuario) {
 
 		usuarioRepository.delete(usuario);
+	}
+
+	@Transactional // confere se a senha esta com todos os caracteres e retorna um true ou false
+	public static boolean existe(Usuario usuario) {
+
+		boolean sizeSenha = false;
+		sizeSenha = usuario.getSenha().length() == 6;
+		return sizeSenha ;
+
 	}
 
 	// fazendo
