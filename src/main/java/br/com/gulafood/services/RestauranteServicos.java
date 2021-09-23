@@ -1,14 +1,15 @@
 package br.com.gulafood.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.gulafood.Repository.RestauranteRepository;
+import br.com.gulafood.exception.EntidadeNaoExiste;
 import br.com.gulafood.model.Restaurante;
 
 /**
@@ -20,13 +21,18 @@ import br.com.gulafood.model.Restaurante;
 @Service
 public class RestauranteServicos {
 
+	private static final String MSG_RESTAURANTE_NAO_EXISTE = 
+			"Restaurante nao exite";
+	
+	
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 	
 	@Transactional
-	public Optional<Restaurante> buscarRestaurante(Long restaurante){
+	public Restaurante buscarRestaurante(Long restaurante){
 		
-		return restauranteRepository.findById(restaurante);
+		return restauranteRepository.findById(restaurante).orElseThrow(
+				()-> new EntidadeNaoExiste(String.format(MSG_RESTAURANTE_NAO_EXISTE)));
 	}
 	
 	@Transactional
@@ -42,9 +48,14 @@ public class RestauranteServicos {
 	}
 	
 	@Transactional
-	public void deletarRestaurante(Restaurante restaurante) {
+	public void deletarRestaurante(Long id) {
 		
-		restauranteRepository.delete(restaurante);
+		try {
+			restauranteRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoExiste(String.format(MSG_RESTAURANTE_NAO_EXISTE));	
+		} 
+		
 	}
 	
 	

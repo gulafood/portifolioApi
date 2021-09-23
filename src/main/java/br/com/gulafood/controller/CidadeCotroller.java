@@ -1,7 +1,6 @@
 package br.com.gulafood.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.com.gulafood.model.Cidade;
+import br.com.gulafood.model.Estado;
 import br.com.gulafood.services.CidadeServicos;
 
 /**
@@ -34,76 +33,63 @@ public class CidadeCotroller {
 
 	@Autowired
 	private CidadeServicos servicosCidade;
-	
-	
-	@GetMapping// busca todas as cidades no banco 
-	public List<Cidade> todas(){
+
+	@GetMapping
+	public List<Cidade> todas() {
 		return servicosCidade.todasCidade();
 	}
-	
-	@GetMapping("/{id}") // busca uma cidade no banco atraves do id
-	public ResponseEntity<Cidade> buscar(@PathVariable Long id){
-		
-		Optional<Cidade> cidades = servicosCidade.buscaCidades(id);
-		
-		return (cidades.isPresent()) ? ResponseEntity.status(HttpStatus.OK).body(cidades.get()):
-			ResponseEntity.noContent().build();
+
+	@GetMapping("/{id}")
+	public Cidade buscar(@PathVariable Long id) {
+
+		return servicosCidade.buscaCidades(id);
+
 	}
-	
-	@PostMapping // salva uma cidade no banco 
-	public Cidade salvar (@RequestBody Cidade cidade) {
-	
+
+	@PostMapping
+	public Cidade salvar(@RequestBody Cidade cidade) {
+
+		Long cidadeId = cidade.getEstado().getId();
+
+		Estado estado = servicosCidade.buscarEstado(cidadeId);
+
+		cidade.setEstado(estado);
 		return servicosCidade.salvarCidade(cidade);
 	}
 	
 
-	
-	@PutMapping("/{id}")// atualiza uma cidade no banco e impede que os outros dados na hora da atualização seja como null
-	ResponseEntity<?> atualiza(@PathVariable Long id , @RequestBody Cidade atualiza){
-		
-		Cidade atualizar = servicosCidade.buscaCidades(id).orElse(null);
-		
-		if(atualizar != null) {
-			
-			BeanUtils.copyProperties(atualiza, atualizar,"id","estado");/*<= evitar deixar como null*/
-			atualizar = servicosCidade.salvarCidade(atualizar);
-			return ResponseEntity.ok(atualizar);
-		}
-		
-		return ResponseEntity.notFound().build();
+	@PutMapping("/{id}")
+	public Cidade atualiza(@PathVariable Long id, @RequestBody Cidade atualiza) {
+
+		Cidade atualizar = servicosCidade.buscaCidades(id);
+
+		BeanUtils.copyProperties(atualiza, atualizar, "id", "estado");/* <= evitar deixar como null */
+		return servicosCidade.salvarCidade(atualizar);
+
 	}
-	
-	
-	@DeleteMapping("/{id}") // deleta uma cidade no banco caso ela nao tenha integridade com outra tabela
+
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
-		
-		try {
-			servicosCidade.buscaCidades(id).map(cidades->{
-				servicosCidade.deletarCidade(cidades);
-				return Void.TYPE;
-			}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+			servicosCidade.deletarCidade(id);
 			
-		} catch (DataIntegrityViolationException e) {
-			
-			ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
+
 	}
 	
+//	@DeleteMapping("/{id}") 
+//	public ResponseEntity<?> deletar(@PathVariable Long id) {
+//
+//		try {
+//			
+//				servicosCidade.deletarCidade(id);
+//
+//		} catch (DataIntegrityViolationException e) {
+//
+//			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+//		}
+//		return ResponseEntity.noContent().build();
+//	}
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

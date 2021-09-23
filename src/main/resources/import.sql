@@ -1,6 +1,9 @@
 insert into cozinha (id,nome) values (1,'Tailandesa');
 insert into cozinha (id,nome) values  (2,'Indiana');
 
+
+
+
 insert into estado  (nome) values ('Minas Gerais');
 insert into estado  (nome) values ('São Paulo');
 
@@ -37,6 +40,7 @@ insert into endereco( endereco_bairro , endereco_cep , endereco_numero , enderec
 
 insert into endereco( endereco_bairro , endereco_cep , endereco_numero , endereco_cidade_id, usuario_endereco_id ) values ('vila nova' , '74585654' , '1000' , 1 , 1);
 
+insert into restaurante(nome,taxa_frete,cozinha_id,endereco_id) values('gula foods',10,1,1);
 
 insert into forma_pagamento (tipo_pagamento) values('avista');
 

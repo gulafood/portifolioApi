@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.gulafood.exception.EntidadeComIntegracaoAoutra;
+import br.com.gulafood.exception.EntidadeNaoExiste;
 import br.com.gulafood.model.Estado;
 import br.com.gulafood.services.EstadoServicos;
 
@@ -75,13 +77,15 @@ public class EstadoController {
 			servicosEstado.buscaEstado(id).map(estados -> {
 				servicosEstado.deletarEstado(estados);
 				return Void.TYPE;
-			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+			}).orElseThrow(() -> new EntidadeNaoExiste("nao existe"));
 
 		} catch (DataIntegrityViolationException e) {
 
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			throw new EntidadeComIntegracaoAoutra("nao pode excluir");
 		}
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 
 }
