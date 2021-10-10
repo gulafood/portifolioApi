@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/home/winston/Documents/workspace-spring-tool-suite-4-4.10.0.RELEASE/food/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2380251435.index
+1813322175.index
+17073529.index
+3579666177.index
+2318160800.index
+1222452990.index
+473408030.index
