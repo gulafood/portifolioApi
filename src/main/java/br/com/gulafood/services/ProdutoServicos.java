@@ -18,6 +18,12 @@ public class ProdutoServicos {
 	private ProdutoRepository produtoRepository;
 
 	@Transactional
+	public List<Produto> buscarProdutoId() {
+
+		return produtoRepository.findAll();
+	}
+	
+	@Transactional
 	public Optional<Produto> buscarProduto(Long id) {
 
 		return produtoRepository.findById(id);

@@ -32,11 +32,17 @@ import br.com.gulafood.services.ProdutoServicos;
 
 @RestController
 @RequestMapping("/produtos")
-
+@CrossOrigin("*")
 public class ProdutoController {
 
 	@Autowired
 	private ProdutoServicos servicoProdutos;
+	
+	@GetMapping
+	public List<Produto> find(){
+		
+		return servicoProdutos.buscarProdutoId();
+	}
 
 	@GetMapping("/nome/produto")
 	public List<Produto> pesquisarPorNomeProdutos(String nome) {
