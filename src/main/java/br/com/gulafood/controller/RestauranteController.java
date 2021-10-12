@@ -3,7 +3,9 @@ package br.com.gulafood.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +40,14 @@ public class RestauranteController {
 	private RestauranteServicos servicosRestaurantes;
 
 	@GetMapping // busca todos os restaurantes de uma tabela
-	List<Restaurante> listar() {
+	ResponseEntity<List<Restaurante>>  listar() {
 
-		return servicosRestaurantes.todosRestaurantes();
+		//
+		
+		List<Restaurante> atualizar = servicosRestaurantes.todosRestaurantes();
+		
+		 return ResponseEntity.ok().header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:8080/requisição.html")
+				 .body(atualizar);
 	}
 
 	@PostMapping // salva um novo restaurante na tabela
