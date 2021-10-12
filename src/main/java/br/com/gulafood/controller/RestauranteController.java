@@ -46,7 +46,7 @@ public class RestauranteController {
 		
 		List<Restaurante> atualizar = servicosRestaurantes.todosRestaurantes();
 		
-		 return ResponseEntity.ok().header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:8000/requisicao.html")
+		 return ResponseEntity.ok().header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:8000")
 				 .body(atualizar);
 	}
 
