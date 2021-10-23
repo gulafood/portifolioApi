@@ -42,7 +42,7 @@ public class ProdutoController {
 	@GetMapping("/nome/produto")
 	public List<Produto> pesquisarPorNomeProdutos(String nome) {
 
-		return servicoProdutos.buscarProdutoPorNomes(nome.toUpperCase());
+		return servicoProdutos.buscarProdutoPorNomes(nome.trim().toUpperCase());
 	}
 
 	@PostMapping
