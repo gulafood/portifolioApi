@@ -22,11 +22,7 @@ import br.com.gulafood.services.ProdutoServicos;
  * 
  * @author winston
  *
- *         classe controle de produtos esta tem funções de atualizar deletar
- *         salvar que sera usado pelo vendedor da plataforma e a função pesquisa
- *         que busca um produto pelo nome de todos jeitos maiusculos e
- *         minusculos e busca todos os produtos tambem sem fazer pesquisa por
- *         nome
+ *      
  */
 
 @RestController

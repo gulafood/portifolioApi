@@ -1,6 +1,7 @@
 package br.com.gulafood.services;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.gulafood.Repository.ProdutoRepository;
 import br.com.gulafood.model.Produto;
+
+/**
+ * 
+ * @author winston
+ *
+ */
 
 @Service
 public class ProdutoServicos {
@@ -45,7 +52,7 @@ public class ProdutoServicos {
 	@Transactional
 	public List<Produto> buscarProdutoPorNomes(String nome) {
 
-		return produtoRepository.findBynomeContaining(nome);
+		return produtoRepository.findBynome(nome);
 	}
 
 }
