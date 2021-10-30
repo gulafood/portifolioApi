@@ -33,4 +33,10 @@ public class Produto implements Serializable{
 	private BigDecimal preco;
 	private boolean ativo;
 	
+	public String getNome() {
+		return nome.toUpperCase();
+	}
+	
+		
+	
 }
