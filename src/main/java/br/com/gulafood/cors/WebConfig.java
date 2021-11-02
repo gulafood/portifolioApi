@@ -1,3 +1,4 @@
+
 package br.com.gulafood.cors;
 
 import org.springframework.context.annotation.Configuration;

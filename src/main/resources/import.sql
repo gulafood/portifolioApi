@@ -1,6 +1,3 @@
-
-
-
 insert into produto(nome,preco,descricao,ativo) values('BIG MAC QUARTERAO',22.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
 insert into produto(nome,preco,descricao,ativo) values('BIG MAC FELIZ',25.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
 insert into produto(nome,preco,descricao,ativo) values('BIG MAC BOM DIA',19.00,'pao, carne, mussarela, chaddar, tomate, alface , molho big mac','true');
@@ -21,5 +18,4 @@ insert into produto(nome,preco,descricao,ativo) values('FANTA UVA ',12.00,' 2 li
 insert into produto(nome,preco,descricao,ativo) values('CERVEJA HEINEKEN',12.00,'330 ML','true');
 insert into produto(nome,preco,descricao,ativo) values('CERVEJA SOL ',12.00,'330 ML','true');
 insert into produto(nome,preco,descricao,ativo) values('SUCO LARANJA ',12.00,'500 ML','true');
-
 

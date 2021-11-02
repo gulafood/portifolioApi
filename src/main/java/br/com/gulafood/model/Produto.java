@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +40,7 @@ public class Produto implements Serializable{
 		return nome.toUpperCase();
 	}
 	
-		
+	private byte[] foto;
+
 	
 }

@@ -14,7 +14,7 @@ import br.com.gulafood.model.Produto;
  *
  */
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long>, ProdutoepositoriesQuery {
+public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
 	@Query("select pr from Produto pr where upper(trim(pr.nome))  like  %?1%")
 	List<Produto> findBynome(String nome);
