@@ -67,8 +67,6 @@ public class ProdutoServicos {
 
 	}
 
-	
-
 	@Transactional
 	public byte[] salvarFoto(Long id, Part arquivo) {
 
