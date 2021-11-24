@@ -30,7 +30,6 @@ public class Produto implements Serializable {
 	private String nome;
 	private String descricao;
 	private BigDecimal preco;
-	private boolean ativo;
 	private byte[] foto;
 
 	public Long getId() {
@@ -65,13 +64,6 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
 
 	public byte[] getFoto() {
 		return foto;
