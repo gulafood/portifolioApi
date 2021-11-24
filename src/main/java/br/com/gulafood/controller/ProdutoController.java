@@ -37,6 +37,12 @@ public class ProdutoController {
 	private ProdutoServicos servicoProdutos;
 	
 	
+	
+	@GetMapping
+	public List<Produto> find(){
+		
+		return servicoProdutos.buscarProdutoId();
+	}
 
 	@GetMapping("/nome/produto")
 	public List<Produto> pesquisarPorNomeProdutos( String nome) {
