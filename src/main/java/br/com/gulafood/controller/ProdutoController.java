@@ -36,6 +36,13 @@ public class ProdutoController {
 	
 	
 	
+	@GetMapping
+	public List<Produto> getAll() {
+
+		return servicoProdutos.buscarTdos();
+	}
+	
+	
 	
 
 	@GetMapping("/nome/produto")

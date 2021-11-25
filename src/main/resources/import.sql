@@ -10,7 +10,7 @@ insert into produto(nome,preco,descricao) values('BIG MAC QUARTERAO EM DOBRO',42
 insert into produto(nome,preco,descricao) values('PIZZA DE CALABRESA',12.00,'queijo,presunto,calacbresa,tomate,oregano,cebola');
 insert into produto(nome,preco,descricao) values('PIZZA DE MUSSARELA ',12.00,'queijo, tomate, molho,oregano,azeitona');
 insert into produto(nome,preco,descricao) values('ACAI NA TIJELA ',12.00,'acai , banana, morango, leite condensado, leite ninho');
-insert into produto(nome,preco,descricao) values('PICOLE MASTER ',12.00,'leite e chocolate','true');
+
 insert into produto(nome,preco,descricao) values('PICANHA NA CHAPA ',129.00,'picanha de sol, arroz, feijao tropeiro, mandioca, vinagrete');
 insert into produto(nome,preco,descricao) values('COCA COLA  ',12.00,'2 litros');
 insert into produto(nome,preco,descricao) values('FANTA LARANJA ',12.00,'2 litros');

@@ -24,6 +24,13 @@ public class ProdutoServicos {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	
+	@Transactional
+	public List<Produto> buscarTdos() {
+
+		return produtoRepository.findAll();
+	}
 
 	@Transactional
 	public List<Produto> buscarProdutoPorNomes(String nome) {
