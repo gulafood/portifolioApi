@@ -2,8 +2,6 @@ package br.com.gulafood.controller;
 
 import java.util.List;
 
-import javax.servlet.http.Part;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,11 +36,7 @@ public class ProdutoController {
 	
 	
 	
-	@GetMapping
-	public List<Produto> find(){
-		
-		return servicoProdutos.buscarProdutoId();
-	}
+	
 
 	@GetMapping("/nome/produto")
 	public List<Produto> pesquisarPorNomeProdutos( String nome) {
@@ -74,9 +68,9 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}/foto")
-	public byte[] atualizar(@PathVariable Long id, @RequestParam("foto") Part arquivo) {
+	public void atualizar(@PathVariable Long id, @RequestParam("foto") String arquivo) {
 
-		return servicoProdutos.salvarFoto(id, arquivo);
+		 servicoProdutos.salvarFoto(id, arquivo);
 	}
 
 }

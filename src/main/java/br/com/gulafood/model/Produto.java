@@ -3,12 +3,15 @@ package br.com.gulafood.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -21,6 +24,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,64 +34,11 @@ public class Produto implements Serializable {
 	private String nome;
 	private String descricao;
 	private BigDecimal preco;
-	private byte[] foto;
-	private boolean ativo;
-	public Long getId() {
-		return id;
-	}
+	
+	@Lob
+	@Column(columnDefinition = "TEXT")
+	private String foto;
 	
 	
-	
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome.toUpperCase();
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public BigDecimal getPreco() {
-		return preco;
-	}
-
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
-
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
-
-
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-
-
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
 
 }
