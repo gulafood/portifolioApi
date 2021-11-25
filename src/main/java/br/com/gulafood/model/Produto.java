@@ -36,6 +36,7 @@ public class Produto implements Serializable {
 	private BigDecimal preco;
 	private boolean ativo;
 	
+	
 	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String foto;
