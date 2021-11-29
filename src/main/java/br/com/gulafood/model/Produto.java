@@ -21,11 +21,14 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Produto implements Serializable {
+	
+
+
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,12 +38,18 @@ public class Produto implements Serializable {
 	private String descricao;
 	private BigDecimal preco;
 	
-	
-	
 	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String foto;
+
+//	@Lob
+//	@Column
+//	private byte[] foto;
 	
+	public void setNome(String nome) {
+		this.nome = nome.toUpperCase();
+	}
+
 	
 
 }

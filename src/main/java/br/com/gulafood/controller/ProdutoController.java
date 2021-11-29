@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.gulafood.exception.ExceptionError;
 import br.com.gulafood.model.Produto;
 import br.com.gulafood.services.ProdutoServicos;
 
@@ -34,15 +35,11 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoServicos servicoProdutos;
 	
-	
-	
 	@GetMapping
-	public List<Produto> getAll() {
-
-		return servicoProdutos.buscarTdos();
+	public List<Produto> findAll(){
+		
+		return servicoProdutos.buscarTodos();
 	}
-	
-	
 	
 
 	@GetMapping("/nome/produto")
@@ -74,10 +71,26 @@ public class ProdutoController {
 		 servicoProdutos.deletarProduto(id);
 	}
 	
+//	@PutMapping("/{id}/foto")
+//	public byte[] atualizar(@PathVariable Long id, @RequestParam("foto") Part arquivo) {
+//
+//		return servicoProdutos.salvarFoto(id, arquivo);
+//	}
+	
 	@PutMapping("/{id}/foto")
 	public void atualizar(@PathVariable Long id, @RequestParam("foto") String arquivo) {
 
-		 servicoProdutos.salvarFoto(id, arquivo);
+			if(!arquivo.isEmpty() && arquivo instanceof String && id != null) {
+				
+					servicoProdutos.salvarFoto(id, arquivo);
+				
+			}else {
+				
+				throw new ExceptionError(String.format("Arquivo vazio "));
+			}
+			
+		
+		
 	}
 
 }
