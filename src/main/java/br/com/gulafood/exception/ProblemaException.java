@@ -1,29 +1,25 @@
 package br.com.gulafood.exception;
 
-import java.time.LocalDate;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Builder;
 import lombok.Getter;
 
+@JsonInclude(Include.NON_NULL)
 @Getter
 @Builder
 public class ProblemaException {
 	
-	private String titulo;
-	private LocalDate data;
+	private Integer status;
+	private String type;
+	private String title;
+	private String detail;
+	
+	private List<MensagemErro.CampoMensagens>  details;
 	
 	
 	
-	@Getter
-	@AllArgsConstructor
-	public static class erros
-	{
-		
-		private String nome;
-		
-		private String mensagem;
-		
-		
-	}
 }

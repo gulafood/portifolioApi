@@ -15,6 +15,6 @@ public class ExceptionError extends RuntimeException {
 	
 	public ExceptionError(Long id) {
 		
-		this(String.format("Não existe este produto com codigo: "+ id));
+		this(String.format("Este produto com o codigo: "+ id + " Não existe no banco tente digitar um codigo valido "));
 	}
 }

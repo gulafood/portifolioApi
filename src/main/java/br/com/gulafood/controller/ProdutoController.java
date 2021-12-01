@@ -2,6 +2,9 @@ package br.com.gulafood.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Part;
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.gulafood.exception.ExceptionError;
 import br.com.gulafood.model.Produto;
 import br.com.gulafood.services.ProdutoServicos;
 
@@ -42,20 +44,20 @@ public class ProdutoController {
 	}
 	
 
-	@GetMapping("/nome/produto")
+	@GetMapping("/pesquisa")
 	public List<Produto> pesquisarPorNomeProdutos( String nome) {
 
 		return servicoProdutos.buscarProdutoPorNomes(nome.trim().toUpperCase());
 	}
 
 	@PostMapping
-	public Produto salvar(@RequestBody Produto produto) {
+	public Produto salvar(@RequestBody @Valid Produto produto) {
 
 		return servicoProdutos.salvarProduto(produto);
 	}
 
 	@PutMapping("/{id}")
-	public Produto atualiza(@PathVariable Long id, @RequestBody Produto atualizar) {
+	public Produto atualiza(@PathVariable Long id, @RequestBody @Valid Produto atualizar) {
 
 		Produto atualiza = servicoProdutos.buscarProduto(id);
 		
@@ -71,26 +73,11 @@ public class ProdutoController {
 		 servicoProdutos.deletarProduto(id);
 	}
 	
-//	@PutMapping("/{id}/foto")
-//	public byte[] atualizar(@PathVariable Long id, @RequestParam("foto") Part arquivo) {
-//
-//		return servicoProdutos.salvarFoto(id, arquivo);
-//	}
-	
 	@PutMapping("/{id}/foto")
-	public void atualizar(@PathVariable Long id, @RequestParam("foto") String arquivo) {
-
-			if(!arquivo.isEmpty() && arquivo instanceof String && id != null) {
-				
-					servicoProdutos.salvarFoto(id, arquivo);
-				
-			}else {
-				
-				throw new ExceptionError(String.format("Arquivo vazio "));
-			}
+	public byte[] atualizar(@PathVariable Long id, @RequestParam("foto") Part arquivo) {
 			
-		
+		return	servicoProdutos.salvarFoto(id, arquivo);	
 		
 	}
-
+	
 }
